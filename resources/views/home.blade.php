@@ -13,5 +13,17 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Playlists</h1>
+            <a href="/playlist">Create New Playlist</a>
+            <ul>
+                <?php foreach ($user->playlists as $playlist) : ?>
+                    <li><a href="/playlists/{{ $playlist->id }}">{{ $playlist->name }}</a></li>
+                <?php endforeach ?>
+            </ul>
+            
+        </div>
+    </div>
 </div>
 @endsection
