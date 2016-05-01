@@ -24,11 +24,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/playlist', 'PlaylistController@index');
     Route::post('/playlist', 'PlaylistController@create');
     Route::get('/playlists/{id}', 'PlaylistController@show');
+    Route::post('/add_to_playlist', 'PlaylistController@add');
 
     // Soundcloud routes
     Route::get('/discover', 'SoundcloudController@discover');
     Route::post('/filter' , 'SoundcloudController@getFilteredTracks');
-
+    Route::post('/nextTrack', 'SoundcloudController@nextTrack');
+    Route::get('/discover_next_song', 'SoundcloudController@update');
+    Route::get('/track/{id}', 'SoundcloudController@showTrack');
 
     
 

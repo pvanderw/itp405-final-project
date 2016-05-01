@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PlaylistSongs extends Model
 {
-    protected $fillable = ['song_id'];
+    protected $fillable = ['song_id', 'name'];
     public $timestamps = false;
 
     public function playlist()
