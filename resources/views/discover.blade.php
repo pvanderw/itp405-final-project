@@ -102,8 +102,8 @@
 		</div>
 		<?php if ($counter < $trackCount-1) : ?>
 			<div class="row" style="margin-bottom: 100px;">
-				<div class="col-md-6">
-					<form class="form-inline" method="post" action="/add_to_playlist" style="margin-left: 150px;">
+				<div class="col-md-5">
+					<form class="form-inline" method="post" action="/add_to_playlist" style="margin-left: 100px;">
 						{{ csrf_field() }}
 						<input type="hidden" name="track_id" value="<?php echo $tracks[$counter]->id ?>">
 						<input type="hidden" name="title" value="<?php echo $tracks[$counter]->title ?>">
@@ -115,8 +115,16 @@
 						<button class="btn btn-success">Add to Playlist</button>
 					</form>
 				</div>
-				<div class="col-md-6">
-					<form method="post" action="/nextTrack" style="margin-left:200px;">
+				<div class="col-md-3">
+					<form method="post" action="/likeTrack">
+						{{ csrf_field() }}
+						<input type="hidden" name="track_id" value="<?php echo $tracks[$counter]->id ?>">
+						<input type="hidden" name="title" value="<?php echo $tracks[$counter]->title ?>">
+						<button class="btn btn-success">Like Track</button>
+					</form>
+				</div>
+				<div class="col-md-3">
+					<form method="post" action="/nextTrack" style="margin-left:75px;">
 						{{ csrf_field() }}
 						<button id="nextButton" class="btn btn-success">
 							Next Track<span class="glyphicon glyphicon-chevron-right"></span>

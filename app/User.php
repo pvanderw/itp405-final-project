@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Playlist');
     }
+
+    public function likedsongs()
+    {
+        return $this->hasMany('App\Models\LikedSongs');
+    }
 }

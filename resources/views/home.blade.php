@@ -22,7 +22,9 @@
                     <li><a href="/playlists/{{ $playlist->id }}">{{ $playlist->name }}</a></li>
                 <?php endforeach ?>
             </ul>
-            
+        </div>
+        <div class="col-md-6">
+            <h1><a href="/liked_songs">Liked Songs</a></h1>
         </div>
     </div>
 </div>

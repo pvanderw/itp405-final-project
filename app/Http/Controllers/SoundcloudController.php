@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Validator;
 use Session;
 use Auth;
+use Cache;
 
 class SoundcloudController extends Controller
 {
@@ -116,7 +117,21 @@ class SoundcloudController extends Controller
 		}
 
 		$url = $url . "limit=15&client_id=$clientID";
-		$jsonString = file_get_contents($url);
+
+		// check if filter parameters are in cache
+		if (Cache::get($url))
+		{
+			//return data from cache
+			$jsonString = Cache::get($url);
+		}
+		else
+		{
+			//request data from SoundCloud
+			//put the data in the cache and return that data
+			$jsonString = file_get_contents($url);
+			Cache::put($url, $jsonString, 60);
+		}
+
 		$tracks = json_decode($jsonString);
 		Session::put('tracks', $tracks);
 		Session::put('trackCount', count($tracks));
@@ -149,7 +164,17 @@ class SoundcloudController extends Controller
 	public function showTrack($id)
 	{
 		$url = "http://api.soundcloud.com/tracks/?ids=$id&client_id=$this->clientID";
-		$jsonString = file_get_contents($url);
+
+		if (Cache::get($url))
+		{
+			$jsonString = Cache::get($url);
+		}
+		else
+		{
+			$jsonString = file_get_contents($url);
+			Cache::put($url, $jsonString, 60);
+		}
+		
 		$track = json_decode($jsonString);
 
 		return view('song', [
